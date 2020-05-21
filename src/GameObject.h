@@ -5,11 +5,13 @@ using namespace std;
 #include "Values.h"
 
 class GameObject {
+  
   protected:
     SDL_Surface* surface;
     SDL_Texture* texture;
     SDL_Rect rect;
     SDL_Renderer* rend;
+
 
   public:
     GameObject(SDL_Renderer* rend, string imagePath){
@@ -29,6 +31,10 @@ class GameObject {
 
     SDL_Rect getRect(){
       return rect;
+    }
+
+    SDL_Texture* getTexture(){
+      return texture;
     }
 
 };

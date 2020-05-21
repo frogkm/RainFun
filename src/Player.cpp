@@ -5,18 +5,11 @@ class Player : public GameObject {
     bool alive;
     int speed;
 
-
   public:
     Player(SDL_Renderer* rend, string imagePath) : GameObject(rend, imagePath) {
 
       alive = true;
       speed = 300;
-
-    }
-
-    void draw(){
-      SDL_RenderCopy(rend, texture, NULL, &rect);
-      cout << "Player drawn" << endl;
 
     }
 

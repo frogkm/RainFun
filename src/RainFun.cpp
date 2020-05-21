@@ -2,10 +2,12 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
 #include "Player.cpp"
+#include "RainDrop.cpp"
 #include "Values.h"
+#include <vector>
 
 void checkKeyboard(Player* player);
-void draw(SDL_Renderer* rend, PLayer* player);
+void draw(SDL_Renderer* rend, Player* player);
 int close = 0;
 
 int main()
@@ -19,7 +21,12 @@ int main()
                                        sW, sH, 0);
     Uint32 render_flags = SDL_RENDERER_ACCELERATED;
     SDL_Renderer* rend = SDL_CreateRenderer(win, -1, render_flags);
-    Player* player = new Player(rend, "/Resources/Player.png");
+
+    Player* player = new Player(rend, "Resources/Player.png");
+    vector<RainDrop*> rainDrops;
+    for(int i = 0; i < 5; i ++){
+      rainDrops.push_back(new RainDrop(rend, "Resources/RainDrop.png"));
+    }
 
     // annimation loop
     while (!close) {

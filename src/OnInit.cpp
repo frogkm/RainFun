@@ -1,8 +1,8 @@
 //==============================================================================
-#include "CApp.h"
+#include "Application.h"
 
 //==============================================================================
-bool CApp::OnInit(){
+bool Application::OnInit(){
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0 ){
         return false;
     }
@@ -26,7 +26,7 @@ bool CApp::OnInit(){
        This will show the new, red contents of the window. */
     SDL_RenderPresent(renderer);
 
-
+    
 
     if (window == NULL){
         return false;

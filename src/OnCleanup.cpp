@@ -1,8 +1,8 @@
 //==============================================================================
-#include "CApp.h"
+#include "Application.h"
 
 //==============================================================================
-void CApp::OnCleanup() {
+void Application::OnCleanup() {
     SDL_FreeSurface(Surf_Display);
     SDL_Quit();
 }

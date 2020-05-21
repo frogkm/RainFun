@@ -1,15 +1,17 @@
 //==============================================================================
-#include "CApp.h"
+#include "Application.h"
 
 //==============================================================================
-CApp::CApp() {
+Application::Application() {
     Surf_Display = NULL;
 
     Running = true;
+
+    player = new Player();
 }
 
 //------------------------------------------------------------------------------
-int CApp::OnExecute() {
+int Application::OnExecute() {
     if(OnInit() == false) {
         return -1;
     }
@@ -24,7 +26,7 @@ int CApp::OnExecute() {
         OnLoop();
         OnRender();
     }
-    
+
     OnCleanup();
 
     return 0;
@@ -32,7 +34,7 @@ int CApp::OnExecute() {
 
 //==============================================================================
 int main(int argc, char* argv[]) {
-    CApp theApp;
+    Application theApp;
     return theApp.OnExecute();
 }
 

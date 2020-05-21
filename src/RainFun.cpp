@@ -1,8 +1,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
-#include "Player.cpp"
-#include "RainDrop.cpp"
+#include "Player.h"
+#include "RainDrop.h"
 #include "Values.h"
 #include <vector>
 

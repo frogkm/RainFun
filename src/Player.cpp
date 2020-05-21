@@ -1,12 +1,6 @@
-#include "GameObject.h"
+#include "Player.h"
 
-class Player : public GameObject {
-  private:
-    bool alive;
-    int speed;
-
-  public:
-    Player(SDL_Renderer* rend, string imagePath) : GameObject(rend, imagePath) {
+Player :: Player(SDL_Renderer* rend, string imagePath) : GameObject(rend, imagePath) {
 
       alive = true;
       speed = 300;
@@ -14,42 +8,40 @@ class Player : public GameObject {
     }
 
 
-    void keepInBounds(){
-      // right boundary
-      if (rect.x + rect.w > sW)
-          rect.x = sW - rect.w;
-      // left boundary
-      if (rect.x < 0)
+void Player :: keepInBounds(){
+  // right boundary
+  if (rect.x + rect.w > sW)
+     rect.x = sW - rect.w;
+  // left boundary
+  if (rect.x < 0)
           rect.x = 0;
-    }
+}
 
-    void setX(int x){
+    void Player :: setX(int x){
       rect.x = x;
     }
-    void setY(int y){
+    void Player :: setY(int y){
       rect.y = y;
     }
-    void setW(int w){
+    void Player :: setW(int w){
       rect.w = w;
     }
-    void setH(int h){
+    void Player :: setH(int h){
       rect.h = h;
     }
 
-    int getX(){
+    int Player :: getX(){
       return rect.x;
     }
-    int getY(){
+    int Player :: getY(){
       return rect.y;
     }
-    int getW(){
+    int Player :: getW(){
       return rect.w;
     }
-    int getH(){
+    int Player :: getH(){
       return rect.h;
     }
-    int getSpeed(){
+    int Player :: getSpeed(){
       return speed;
     }
-
-};

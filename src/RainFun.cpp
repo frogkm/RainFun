@@ -1,11 +1,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
-//#include "Values.h"
 #include "Player.cpp"
+#include "Values.h"
 
 void checkKeyboard(Player* player);
-void draw(SDL_Renderer* rend, Player* player);
+void draw(SDL_Renderer* rend, PLayer* player);
 int close = 0;
 
 int main()
@@ -16,10 +16,10 @@ int main()
     SDL_Window* win = SDL_CreateWindow("GAME", // creates a window
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
-                                       1000, 1000, 0);
+                                       sW, sH, 0);
     Uint32 render_flags = SDL_RENDERER_ACCELERATED;
     SDL_Renderer* rend = SDL_CreateRenderer(win, -1, render_flags);
-    Player* player = new Player(rend);
+    Player* player = new Player(rend, "/Resources/Player.png");
 
     // annimation loop
     while (!close) {

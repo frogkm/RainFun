@@ -1,47 +1,33 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <iostream>
-using namespace std;
-//#include "Values.h"
+#include "GameObject.h"
 
-class Player {
+class Player : public GameObject {
   private:
     bool alive;
     int speed;
-    SDL_Surface* surface;
-    SDL_Texture* texture;
-    SDL_Rect rect;
-    SDL_Renderer* rend;
+
 
   public:
-    Player(SDL_Renderer* rend){
+    Player(SDL_Renderer* rend, string imagePath) : GameObject(rend, imagePath) {
+
       alive = true;
       speed = 300;
-      surface = IMG_Load("Resources/Player.png");
-      this->rend = rend;
-      texture = SDL_CreateTextureFromSurface(rend, surface);
-      SDL_FreeSurface(surface);
-      SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-      rect.x = (1000 - rect.w) / 2;
-      rect.y = 1000 - rect.h;
+
     }
 
     void draw(){
       SDL_RenderCopy(rend, texture, NULL, &rect);
+      cout << "Player drawn" << endl;
+
     }
+
 
     void keepInBounds(){
       // right boundary
-      if (rect.x + rect.w > 1000)
-          rect.x = 1000 - rect.w;
-
+      if (rect.x + rect.w > sW)
+          rect.x = sW - rect.w;
       // left boundary
       if (rect.x < 0)
           rect.x = 0;
-    }
-
-    SDL_Rect getRect(){
-      return rect;
     }
 
     void setX(int x){

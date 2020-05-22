@@ -4,9 +4,7 @@ Player :: Player(SDL_Renderer* rend, string imagePath) : GameObject(rend, imageP
 
       alive = true;
       speed = 10;
-
     }
-
 
 void Player :: keepInBounds(){
   // right boundary
@@ -16,7 +14,6 @@ void Player :: keepInBounds(){
   if (rect.x < 0)
           rect.x = 0;
 }
-
 
     int Player :: getSpeed(){
       return speed;

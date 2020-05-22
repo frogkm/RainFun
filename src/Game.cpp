@@ -16,6 +16,8 @@ Game :: Game() {
   max = 60;
   countLimit = min + (rand() % (max - min));
 
+
+
   while(running){
     loop();
   }
@@ -61,7 +63,17 @@ void Game :: collided(){
 }
 
 void Game :: draw(){
+
   SDL_RenderClear(rend);
+  /*
+  SDL_Rect rect;
+  SDL_Surface* surface = IMG_Load(const_cast<char*>("Resources/cloudy.png"));
+  SDL_Texture* texture = SDL_CreateTextureFromSurface(rend, surface);
+  SDL_FreeSurface(surface);
+  SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+  SDL_RenderCopy(rend, texture, NULL, &rect);
+  */
+
   player->draw(rend);
   for(RainDrop* rainDrop : rainDrops){
     rainDrop ->draw(rend);

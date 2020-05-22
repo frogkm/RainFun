@@ -8,9 +8,8 @@ class RainDrop : public GameObject{
     int speed;
 
   public:
-    RainDrop(SDL_Renderer* rend, string imagePath, int y);
-    void checkBounds();
-    void fall();
+    RainDrop(SDL_Renderer* rend, string imagePath);
+    bool fall();
 
 };
 

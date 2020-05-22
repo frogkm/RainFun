@@ -16,10 +16,15 @@ class Game {
     Player* player;
     vector<RainDrop*> rainDrops;
     bool running;
+    int count;
+    int min;
+    int max;
+    int countLimit;
     void loop();
     void checkKeyboard();
     void draw();
     void checkCollision();
+    void collided();
 
   public:
     Game();

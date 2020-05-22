@@ -10,25 +10,36 @@ Game :: Game() {
                                      sW, sH, 0);
   rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
   player = new Player(rend, "Resources/Player.png");
-  for(int i = 1; i < 6; i ++){
-    rainDrops.push_back(new RainDrop(rend, "Resources/RainDrop.png", -(i * 225)));
-  }
   running = true;
+  count = 0;
+  min = 0;
+  max = 60;
+  countLimit = min + (rand() % (max - min));
 
   while(running){
     loop();
   }
 
-  //SDL_DestroyTexture(tex);
   SDL_DestroyRenderer(rend);
   SDL_DestroyWindow(win);
 }
 
 void Game :: loop(){
+  count ++;
+  if(count >= countLimit){
+    rainDrops.push_back(new RainDrop(rend, "Resources/RainDrop.png"));
+    countLimit = min + (rand() % (max - min));
+    if(max > 10){
+      max -= 1;
+    }
+    count = 0;
+  }
   checkKeyboard();
   player -> keepInBounds();
-  for(RainDrop* rainDrop : rainDrops){
-    rainDrop->fall();
+  for(int i = 0; i < rainDrops.size(); i ++){
+    if(!rainDrops[i]->fall()){
+      rainDrops.erase(rainDrops.begin() + i);
+    }
   }
   checkCollision();
   draw();
@@ -40,9 +51,13 @@ void Game :: checkCollision(){
     if(SDL_HasIntersection(rainDrops[i]->getRect(), player->getRect())){
       cout << "you got rect" << endl;
       rainDrops.erase(rainDrops.begin() + i);
+      collided();
     }
   }
+}
 
+void Game :: collided(){
+  running = false;
 }
 
 void Game :: draw(){

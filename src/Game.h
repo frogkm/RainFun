@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "RainDrop.h"
 #include "Values.h"
+#include <time.h>
 #include <vector>
 
 
@@ -29,6 +30,8 @@ class Game {
     void collided();
     GameObject* background;
     GameObject* scoreTxt;
+    clock_t start;
+    double currentTime;
 
   public:
     Game();

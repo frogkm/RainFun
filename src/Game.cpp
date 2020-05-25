@@ -4,6 +4,7 @@ Game :: Game() {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
       printf("error initializing SDL: %s\n", SDL_GetError());
   }
+  TTF_Init();
   win = SDL_CreateWindow("GAME", // creates a window
                                      SDL_WINDOWPOS_CENTERED,
                                      SDL_WINDOWPOS_CENTERED,
@@ -16,27 +17,38 @@ Game :: Game() {
   max = 60;
   countLimit = min + (rand() % (max - min));
   background = new GameObject(rend, IMG_Load(const_cast<char*>("Resources/cloudy.png")), 0, 0, sW, sH);
-
-  TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24);
-  SDL_Color White = {255, 255, 255};
-  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, "put your text here", White);
-  scoreTxt = new GameObject(rend, surfaceMessage, 0, 0, 100, 100);
+  currentTime = 0;
+  //TTF_Font* font = TTF_OpenFont("Resources/bodoni.ttf", 25);
+  //SDL_Color Black = {0, 0, 0};
+  //SDL_Color White = {255, 255, 255};
+  //SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, "Time: " + std::to_string(currentTime), White);
+  //scoreTxt = new GameObject(rend, surfaceMessage);
+  //scoreTxt->setW(scoreTxt->getW() * 2);
+  //scoreTxt->setH(scoreTxt->getH() * 2);
+  //scoreTxt->setX(0);
+  //scoreTxt->setY(0);
+  start = clock();
 
 
   while(running){
     loop();
   }
 
+  cout << max << endl;
+  //cout << ((clock() - start) / CLOCKS_PER_SEC) << endl;
   SDL_DestroyRenderer(rend);
   SDL_DestroyWindow(win);
+  TTF_Quit();
+  SDL_Quit();
 }
 
 void Game :: loop(){
   count ++;
   if(count >= countLimit){
+    currentTime = (clock() - start);
     rainDrops.push_back(new RainDrop(rend, "Resources/RainDrop.png"));
     countLimit = min + (rand() % (max - min));
-    if(max > 10){
+    if(max > 8){
       max -= 1;
     }
     count = 0;
@@ -70,7 +82,8 @@ void Game :: collided(){
 void Game :: draw(){
 
   SDL_RenderClear(rend);
-  background->draw(rend);
+  //background->draw(rend);
+  //scoreTxt->draw(rend);
   player->draw(rend);
   for(RainDrop* rainDrop : rainDrops){
     rainDrop ->draw(rend);

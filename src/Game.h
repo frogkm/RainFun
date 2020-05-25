@@ -4,10 +4,12 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_ttf.h>
 #include "Player.h"
 #include "RainDrop.h"
 #include "Values.h"
 #include <vector>
+
 
 class Game {
   private:
@@ -25,6 +27,8 @@ class Game {
     void draw();
     void checkCollision();
     void collided();
+    GameObject* background;
+    GameObject* scoreTxt;
 
   public:
     Game();

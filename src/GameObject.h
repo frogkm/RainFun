@@ -15,14 +15,25 @@ class GameObject {
     SDL_Rect rect;
 
   public:
-    GameObject(SDL_Renderer* rend, string imagePath){
-      surface = IMG_Load(const_cast<char*>(imagePath.c_str()));
+    GameObject(SDL_Renderer* rend, SDL_Surface* surface){
+      this->surface = surface;
       texture = SDL_CreateTextureFromSurface(rend, surface);
       SDL_FreeSurface(surface);
       SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
       rect.x = (sW - rect.w) / 2;
       rect.y = sH - rect.h;
     }
+
+    GameObject(SDL_Renderer* rend, SDL_Surface* surface, int x, int y) : GameObject(rend, surface){
+      setX(x);
+      setY(y);
+    }
+
+    GameObject(SDL_Renderer* rend, SDL_Surface* surface, int x, int y, int w, int h) : GameObject(rend, surface, x, y){
+      setW(w);
+      setH(h);
+    }
+
     void setX(int x){
       rect.x = x;
     }

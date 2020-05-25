@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player :: Player(SDL_Renderer* rend, string imagePath) : GameObject(rend, imagePath) {
+Player :: Player(SDL_Renderer* rend, string imagePath) : GameObject(rend, IMG_Load(const_cast<char*>(imagePath.c_str()))) {
 
       alive = true;
       speed = 10;

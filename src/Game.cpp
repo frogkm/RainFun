@@ -15,7 +15,12 @@ Game :: Game() {
   min = 0;
   max = 60;
   countLimit = min + (rand() % (max - min));
+  background = new GameObject(rend, IMG_Load(const_cast<char*>("Resources/cloudy.png")), 0, 0, sW, sH);
 
+  TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24);
+  SDL_Color White = {255, 255, 255};
+  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, "put your text here", White);
+  scoreTxt = new GameObject(rend, surfaceMessage, 0, 0, 100, 100);
 
 
   while(running){
@@ -65,15 +70,7 @@ void Game :: collided(){
 void Game :: draw(){
 
   SDL_RenderClear(rend);
-  /*
-  SDL_Rect rect;
-  SDL_Surface* surface = IMG_Load(const_cast<char*>("Resources/cloudy.png"));
-  SDL_Texture* texture = SDL_CreateTextureFromSurface(rend, surface);
-  SDL_FreeSurface(surface);
-  SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-  SDL_RenderCopy(rend, texture, NULL, &rect);
-  */
-
+  background->draw(rend);
   player->draw(rend);
   for(RainDrop* rainDrop : rainDrops){
     rainDrop ->draw(rend);
